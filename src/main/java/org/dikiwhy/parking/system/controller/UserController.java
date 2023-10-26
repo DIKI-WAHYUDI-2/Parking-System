@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping("/login")
     public String save(User user) {
         service.saveUser(user);
-        return "login";
+        return "dashboard";
     }
 
     @GetMapping("/login")
@@ -39,7 +39,7 @@ public class UserController {
     public String dashboard(User user, RedirectAttributes redirectAttributes) {
         boolean success = service.loginUser(user);
         if (!success) {
-            redirectAttributes.addFlashAttribute("alert", "Gagal login");
+            redirectAttributes.addFlashAttribute("alert", "Invalid username and/or password");
             return "redirect:/login";
         }
         return "dashboard";

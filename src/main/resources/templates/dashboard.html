@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
   <head><script src="../static/assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
@@ -241,7 +241,6 @@
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <i class="bi bi-car-front"></i>
-
                 Add Vehicle
               </a>
             </li>
@@ -252,9 +251,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" th:href="@{/register}">
                 <svg class="bi"><use xlink:href="#people"/></svg>
-                Customers
+                Add Users
               </a>
             </li>
             <li class="nav-item">
