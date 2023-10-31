@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
 
     <link href="../static/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
 
     <style>
       .bd-placeholder-img {
@@ -92,9 +93,9 @@
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
-    <link href="checkout.css" rel="stylesheet">
+    <link href="../static/checkout.css" rel="stylesheet">
   </head>
   <body class="bg-body-tertiary">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -148,49 +149,35 @@
       </ul>
     </div>
 
-    
+
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="../static/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h2>Registration form</h2>
+      <h2>Form Menambahkan Kendaraan</h2>
       <p class="lead"></p>
     </div>
 
-    <div class="col-xl">
       <div class="col-lg-8 mx-auto">
-        <h4 class="mb-3">Create Account</h4>
-        <form novalidate th:object="${user}" th:action="@{/login}" method="post">
+        <h4 class="mb-3">Tambah Kendaraan</h4>
+
+
+
+        <form novalidate th:object="${vehicle}" th:action="@{/dashboard}" method="post">
           <div class="row g-3 mx-auto">
             <div class="col-12">
-              <label for="firstName" class="form-label">Name</label>
-              <input th:field="*{name}" type="text" class="form-control" id="firstName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
+              <label for="plat nomor" class="form-label">Plat Nomor</label>
+              <input th:field="*{numberPlate}" type="text" class="form-control" id="plat nomor" placeholder="XX XXXX XX" value="" required>
             </div>
 
-            <div class="col-12">
-              <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-              <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="you@example.com">
+            <div class="col-md-5">
+              <label class="form-label">Jenis Kendaraan</label>
+              <select th:field="*{typeVehicle}" class="form-select" required>
+                <option value="">Choose...</option>
+                <option value="Roda Dua">Roda Dua</option>
+                <option value="Roda Empat">Roda Empat</option>
+              </select>
               <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
-
-            <div class="col-12">
-              <label for="password" class="form-label">Password<span class="text-body-secondary"></span></label>
-              <input th:field="*{password}" type="password" class="form-control" id="password" >
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
-
-            <div class="col-12">
-              <label for="password" class="form-label">Confirm Password<span class="text-body-secondary"></span></label>
-              <input type="password" class="form-control">
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                Please select a valid country.
               </div>
             </div>
           </div>
@@ -200,7 +187,6 @@
           <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
         </form>
       </div>
-    </div>
   </main>
 
   <footer class="my-5 pt-5 text-body-secondary text-center text-small">
@@ -212,7 +198,9 @@
     </ul>
   </footer>
 </div>
-<script src="../static/bootstrap.bundle.min.js"></script>
 
-    <script src="checkout.js"></script></body>
+    <script src="../static/bootstrap.bundle.min.js"></script>
+    <script src="../static/script.js"></script>
+
+    <script src="../static/checkout.js"></script></body>
 </html>

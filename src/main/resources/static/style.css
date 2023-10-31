@@ -1,0 +1,20 @@
+/*body {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    margin: 0;*/
+/*}*/
+
+.camera-container {
+    width: 90%;
+    height: 50%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin : 0 20px 20px 50px
+}
+
+video {
+    width: 100%;
+    display: block;
+}

@@ -1,17 +1,13 @@
 package org.dikiwhy.parking.system.service;
 
-import org.dikiwhy.parking.system.entity.User;
 import org.dikiwhy.parking.system.entity.Vehicle;
 import org.dikiwhy.parking.system.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -19,6 +15,14 @@ public class VehicleService {
 
     @Autowired
     private VehicleRepository repository;
+
+    public List<Vehicle> findAll(){
+        return repository.findAll();
+    }
+
+    public List<Vehicle> findByNumberPlate(String numberPlate){
+        return repository.findByNumberPlateContains(numberPlate);
+    }
 
     public void saveVehicle(Vehicle vehicle) {
         Vehicle newVehicle = new Vehicle();
@@ -48,8 +52,7 @@ public class VehicleService {
 
     private Long countLongParkingTime(String numberPlate) {
 
-        Date timeStart;
-        Date timeEnd;
+        Date timeStart, timeEnd;
         long minutes;
 
         Vehicle vehicle1 = repository.findById(numberPlate).orElse(null);
