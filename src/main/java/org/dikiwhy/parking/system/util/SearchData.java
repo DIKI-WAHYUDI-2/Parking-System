@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SearchData {
 
-    private String numberplate;
+    private String keyword;
 }

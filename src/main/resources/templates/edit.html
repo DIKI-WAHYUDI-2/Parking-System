@@ -153,28 +153,39 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>Form Membayar Kendaraan</h2>
+      <h2>Form Menambahkan Kendaraan</h2>
       <p class="lead"></p>
     </div>
 
       <div class="col-lg-8 mx-auto">
-        <h4 class="mb-3">Bayar Kendaraan</h4>
+        <h4 class="mb-3">Tambah Kendaraan</h4>
 
 
         <div class="camera-container">
           <video id="video-element" autoplay></video>
         </div>
 
-        <form novalidate th:object="${vehicle}" th:action="@{/paid}" method="post">
+        <form novalidate th:object="${vehicle}" th:action="@{/update}" method="post">
           <div class="row g-3 mx-auto">
             <div class="col-12">
               <label for="plat nomor" class="form-label">Plat Nomor</label>
               <input th:field="*{numberPlate}" type="text" class="form-control" id="plat nomor" placeholder="XX XXXX XX" value="" required>
             </div>
+
+            <div class="col-md-5">
+              <label class="form-label">Jenis Kendaraan</label>
+              <select th:field="*{typeVehicle}" class="form-select" required>
+                <option value="">Choose...</option>
+                <option value="Roda Dua">Roda Dua</option>
+                <option value="Roda Empat">Roda Empat</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
           </div>
 
           <hr class="my-4">
-
           <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
         </form>
       </div>

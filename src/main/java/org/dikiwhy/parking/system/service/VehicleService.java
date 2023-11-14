@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,11 +25,20 @@ public class VehicleService {
         return repository.findByNumberPlateContains(numberPlate);
     }
 
+    public Optional<Vehicle> findById(String numberPlate){
+        return repository.findById(numberPlate);
+    }
+
+    public void updateVehicle(Vehicle vehicle){
+        repository.save(vehicle);
+    }
+
     public void saveVehicle(Vehicle vehicle) {
         Vehicle newVehicle = new Vehicle();
         newVehicle.setNumberPlate(vehicle.getNumberPlate());
         newVehicle.setTypeVehicle(vehicle.getTypeVehicle());
         newVehicle.setEntryTime(new Date());
+        newVehicle.setStatus("belum bayar");
 
         repository.save(newVehicle);
     }
@@ -45,6 +55,7 @@ public class VehicleService {
 
             vehicle.setLongParkingTime(countLongParkingTime(numberPlate));
             vehicle.setParkingFee(countParkingFee(numberPlate));
+            vehicle.setStatus("telah bayar");
             repository.save(vehicle);
 
         }
@@ -52,7 +63,7 @@ public class VehicleService {
 
     private Long countLongParkingTime(String numberPlate) {
 
-        Date timeStart, timeEnd;
+        Date timeStart,timeEnd;
         long minutes;
 
         Vehicle vehicle1 = repository.findById(numberPlate).orElse(null);
@@ -77,34 +88,41 @@ public class VehicleService {
 
         if (vehicle != null){
 
-            int fee = 0;
-
             String typeVehicle = vehicle.getTypeVehicle();
-            long minutes = vehicle.getLongParkingTime();
+            Long time = vehicle.getLongParkingTime();
+            Integer fee;
 
             if (typeVehicle.equals("Roda Dua")){
+
                 fee = 2000;
-            } else if (typeVehicle.equals("Roda Empat")) {
+
+                if (time >= 120){
+                    fee =+ 1000;
+                } else if(time >= 240){
+                    fee =+ 2000;
+                } else if(time >= 360){
+                    fee =+ 3000;
+                } else if (time >= 480){
+                    fee = 6000;
+                }
+                return fee;
+
+            }else if (typeVehicle.equals("Roda Empat")){
+
                 fee = 3000;
+
+                if (time >= 120){
+                    fee =+ 1000;
+                } else if(time >= 240){
+                    fee =+ 2000;
+                } else if(time >= 360){
+                    fee =+ 3000;
+                } else if (time >= 480){
+                    fee = 6000;
+                }
+                return fee;
             }
-            return fee;
         }
         return null;
     }
-
-//    private Integer cekMinutes(long minutes){
-//
-//        if (minutes > 240){
-//
-//        }
-//    }
-//
-//    private Integer checkTypeVehicle(String typeVehicle){
-//
-//        if (typeVehicle.equals("Roda dua")){
-//            return 2000;
-//        }
-//        return 3000;
-//    }
-
 }

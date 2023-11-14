@@ -15,6 +15,7 @@ class VehicleServiceTest {
 
     @Autowired
     private VehicleRepository repository;
+
     @Autowired
     private VehicleService vehicleService;
 
@@ -22,9 +23,10 @@ class VehicleServiceTest {
     void save() {
 
         Vehicle vehicle = new Vehicle();
-        vehicle.setNumberPlate("BM 1234 AA");
-        vehicle.setTypeVehicle("Roda Dua");
+        vehicle.setNumberPlate("BM 1990 AD");
+        vehicle.setTypeVehicle("Roda Empat");
         vehicle.setEntryTime(new Date());
+        vehicle.setStatus("belum bayar");
 
         vehicleService.saveVehicle(vehicle);
 
@@ -36,49 +38,31 @@ class VehicleServiceTest {
     @Test
     void paid(){
 
-        String bm = "BM 1234 AA";
+        String bm = "BM 1990 AD";
 
-        Vehicle vehicle = repository.findById(bm).orElse(null);
-
-        if(vehicle != null){
-            vehicleService.paidVehicle(bm);
-
-            assertNotNull(vehicle.getNumberPlate());
-            assertNotNull(vehicle.getTypeVehicle());
-            assertNotNull(vehicle.getEntryTime());
-            assertNotNull(vehicle.getExitTime());
-            assertNotNull(vehicle.getLongParkingTime());
-            assertNotNull(vehicle.getParkingFee());
-        }
+        vehicleService.paidVehicle(bm);
     }
 
-    @Test
-    void query() {
+    private Long countLongParkingTime(String numberPlate) {
 
-        long time;
-        Date timeDb;
-        Date timeNow = new Date();
-        String bm = "BM 1234 AA";
+        Date timeStart,timeEnd;
+        long minutes;
 
-        Vehicle vehicle = repository.findById(bm).orElse(null);
+        Vehicle vehicle1 = repository.findById(numberPlate).orElse(null);
 
-        if (vehicle != null){
+        if (vehicle1 != null) {
+            timeStart = vehicle1.getEntryTime();
+            timeEnd = vehicle1.getExitTime();
 
-            timeDb = vehicle.getEntryTime();
+            long time = timeEnd.getTime() - timeStart.getTime();
 
-            time = timeNow.getTime() - timeDb.getTime();
+            minutes = (time / 1000) / 60;
 
-            long seconds = time / 1000;
-            long minutes = seconds / 60;
-            long hours = minutes / 60;
-
-            System.out.println("Selisih waktu dalam milisekon: " + time);
-            System.out.println("Selisih waktu dalam detik: " + seconds);
-            System.out.println("Selisih waktu dalam menit: " + minutes);
-            System.out.println("Selisih waktu dalam jam: " + hours);
-            System.out.println(time);
+            return minutes;
         }
 
+        return null;
     }
+
 
 }

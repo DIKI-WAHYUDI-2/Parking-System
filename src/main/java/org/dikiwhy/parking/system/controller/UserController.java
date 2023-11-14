@@ -51,7 +51,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("alert", "Invalid username and/or password");
             return "redirect:/login";
         }
-        return "dashboard";
+        return "redirect:/dashboard-data";
     }
 
     @PostMapping("/dashboard-data")
@@ -63,6 +63,38 @@ public class UserController {
         return "dashboard";
     }
 
+//    @Controller
+//    public class HomeController {
+//        @GetMapping("/")
+//        public String greeting() {
+//            return "index";
+//        }
+//
+//        @GetMapping("/login")
+//        public String login() {
+//            return "login";
+//        }
+//
+//        @GetMapping("/admin")
+//        public String admin() {
+//            return "admin";
+//        }
+//
+//        @GetMapping("/manager")
+//        public String manager() {
+//            return "manager";
+//        }
+//
+//        @GetMapping("/employee")
+//        public String employee() {
+//            return "employee";
+//        }
+//
+//        @GetMapping("/logout")
+//        public String logout() {
+//            return "redirect:/login";
+//        }
+//    }
 
 
 }

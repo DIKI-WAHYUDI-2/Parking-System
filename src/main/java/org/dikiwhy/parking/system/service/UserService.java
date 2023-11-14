@@ -27,9 +27,9 @@ public class UserService {
 
     public boolean loginUser(User user){
 
-        Optional<User> userExist = repository.findById(user.getEmail());
+        Optional<User> userExist = repository.findById(user.getUsername());
 
-        var cekUsername = userExist.equals(repository.findById(user.getEmail()));
+        var cekUsername = userExist.equals(repository.findById(user.getUsername()));
         var cekPassword = userExist.get().getPassword().equals(user.getPassword());
 
         if (cekUsername && cekPassword){

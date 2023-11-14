@@ -27,6 +27,9 @@ public class Vehicle {
     @Column(nullable = false)
     private Date entryTime;
 
+    @Column(length = 20, nullable = false)
+    private String status;
+
     private Date exitTime;
 
     private Long longParkingTime;

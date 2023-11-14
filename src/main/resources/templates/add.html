@@ -161,6 +161,9 @@
         <h4 class="mb-3">Tambah Kendaraan</h4>
 
 
+        <div class="camera-container">
+          <video id="video-element" autoplay></video>
+        </div>
 
         <form novalidate th:object="${vehicle}" th:action="@{/dashboard}" method="post">
           <div class="row g-3 mx-auto">
