@@ -85,4 +85,6 @@ public class VehicleController {
         repo.save(vehicle);
         return "redirect:/dashboard-data";
     }
+
+
 }

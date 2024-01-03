@@ -26,6 +26,11 @@ public class UserController {
     @Autowired
     private VehicleService vehicleService;
 
+    @GetMapping("/users")
+    public String user(){
+        return "user";
+    }
+
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
