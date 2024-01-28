@@ -1,5 +1,6 @@
 package org.dikiwhy.parking.system.repository;
 
+import org.dikiwhy.parking.system.entity.Payment;
 import org.dikiwhy.parking.system.entity.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -7,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
-    Optional<Vehicle>findByPoliceNumber(String policeNumber);
-    String findByVehicleType(String vehicleType);
+    Optional<Payment>findById(Vehicle vehicle);
 }

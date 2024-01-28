@@ -9,16 +9,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vehicle {
+public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String policeNumber;
-    private String vehicleType;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL)
-    private Ticket ticket;
+    @OneToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 }
